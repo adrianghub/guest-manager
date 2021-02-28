@@ -7,6 +7,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        Fiesta fiesta = new Fiesta();
+
+
         boolean shouldContinue = true;
 
         while (shouldContinue) {
@@ -21,10 +24,10 @@ public class Main {
 
             switch (userChoice) {
                 case 1:
-                    System.out.println("option 1");
+                    fiesta.displayGuests();
                     break;
                 case 2:
-                    System.out.println("option 2");
+                    fiesta.addGuest();
                     break;
                 case 3:
                     System.out.println("option 3");
@@ -33,7 +36,7 @@ public class Main {
                     System.out.println("option 4");
                     break;
                 case 5:
-                    System.out.println("option 5");
+                    System.out.println("Program killed...");
                     shouldContinue = false;
                     break;
             }
