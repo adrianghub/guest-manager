@@ -3,9 +3,9 @@ package com.company;
 import java.util.*;
 
 public class Fiesta {
-    private List<Guest> guests = new ArrayList<>();
-    private Set<String> meals = new HashSet<>();
-    private Map<Integer, Guest> guestPhone = new HashMap<>();
+    private final List<Guest> guests = new ArrayList<>();
+    private final Set<String> meals = new HashSet<>();
+    private final Map<Integer, Guest> guestPhone = new HashMap<>();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -23,13 +23,6 @@ public class Fiesta {
         return containsDigit;
     }
 
-    public void displayGuests() {
-        for (Guest guest: guests) {
-            guest.displayGuestInfo();
-            System.out.println();
-        }
-    }
-
     public void addGuest() {
         System.out.println("Enter name of a guest: ");
         String name = scanner.nextLine().trim();
@@ -38,12 +31,12 @@ public class Fiesta {
         String preferredMeal = scanner.nextLine();
 
         System.out.println("Type your phone number: ");
-        int phoneNumber = Integer.valueOf(scanner.nextLine());
+        int phoneNumber = Integer.parseInt(scanner.nextLine());
 
         System.out.println("Are you a vegan? (Y/N): ");
         String isVeganString = scanner.nextLine();
 
-        boolean isVegan = false;
+        boolean isVegan;
 
         if (isVeganString.equals("Y")) {
             isVegan = true;
@@ -63,9 +56,47 @@ public class Fiesta {
 
         Guest guest = new Guest(name, preferredMeal, phoneNumber, isVegan);
 
-        meals.add(meal);
+        meals.add(preferredMeal);
         guestPhone.put(phoneNumber, guest);
-
         guests.add(guest);
+    }
+
+    public void displayGuests() {
+
+        if(guests.isEmpty()) {
+            System.out.println("No one is invited right now...");
+            System.out.println();
+        }
+
+        for (Guest guest: guests) {
+            guest.displayGuestInfo();
+        }
+    }
+
+    public void displayMeals() {
+
+        if(meals.isEmpty()) {
+            System.out.println("There is no meal big boy...");
+            System.out.println();
+        }
+
+        for(String meal: meals) {
+            System.out.println(meal);
+            System.out.println();
+        }
+    }
+
+    public void displayGuestByPhoneNumber() {
+        System.out.println("Enter phone number: ");
+        Integer phoneNumber = Integer.valueOf(scanner.nextLine());
+        Guest guest = guestPhone.get(phoneNumber);
+
+        if (guestPhone.containsKey(phoneNumber)) {
+            System.out.println("Found: ");
+            guest.displayGuestInfo();
+        } else {
+            System.out.println("No guest has this phone number.");
+            System.out.println();
+        }
     }
 }

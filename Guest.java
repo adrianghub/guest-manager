@@ -1,10 +1,10 @@
 package com.company;
 
 public class Guest {
-    private String name;
-    private String preferredMeal;
-    private int phoneNumber;
-    private boolean isVegan;
+    private final String name;
+    private final String preferredMeal;
+    private final int phoneNumber;
+    private final boolean isVegan;
 
     public Guest(String name, String preferredMeal, int phoneNumber, boolean isVegan) {
         this.name = name;
@@ -31,9 +31,10 @@ public class Guest {
 
     public void displayGuestInfo() {
         System.out.println("Name: " + name);
-        System.out.println("Preferowany posiłek: " + preferredMeal);
+        System.out.println("Preferred meal option: " + preferredMeal);
         System.out.println("Phone number: " + phoneNumber);
         String isVeganString = isVegan ? "Yes" : "Nah...";
         System.out.println("Vegan? " + isVeganString);
+        System.out.println();
     }
 }

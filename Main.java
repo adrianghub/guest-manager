@@ -24,16 +24,20 @@ public class Main {
 
             switch (userChoice) {
                 case 1:
+                    System.out.println("List of all guests: ");
+                    System.out.println("-------------------");
                     fiesta.displayGuests();
                     break;
                 case 2:
                     fiesta.addGuest();
                     break;
                 case 3:
-                    System.out.println("option 3");
+                    System.out.println("Available dishes: ");
+                    fiesta.displayMeals();
                     break;
                 case 4:
-                    System.out.println("option 4");
+                    System.out.println("Finding guest by phone number...");
+                    fiesta.displayGuestByPhoneNumber();
                     break;
                 case 5:
                     System.out.println("Program killed...");
