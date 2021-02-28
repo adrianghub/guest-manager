@@ -1,11 +1,11 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Fiesta {
-    private List<String> guests = new ArrayList<>();
+    private List<Guest> guests = new ArrayList<>();
+    private Set<String> meals = new HashSet<>();
+    private Map<Integer, Guest> guestPhone = new HashMap<>();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -24,8 +24,9 @@ public class Fiesta {
     }
 
     public void displayGuests() {
-        for (String guest: guests) {
-            System.out.println(guest);
+        for (Guest guest: guests) {
+            guest.displayGuestInfo();
+            System.out.println();
         }
     }
 
@@ -33,15 +34,38 @@ public class Fiesta {
         System.out.println("Enter name of a guest: ");
         String name = scanner.nextLine().trim();
 
+        System.out.println("Enter preferred meal option: ");
+        String preferredMeal = scanner.nextLine();
 
-        if(containsDigit(name)) {
+        System.out.println("Type your phone number: ");
+        int phoneNumber = Integer.valueOf(scanner.nextLine());
+
+        System.out.println("Are you a vegan? (Y/N): ");
+        String isVeganString = scanner.nextLine();
+
+        boolean isVegan = false;
+
+        if (isVeganString.equals("Y")) {
+            isVegan = true;
+        } else if (isVeganString.equals("N")) {
+            isVegan = false;
+        } else {
+            throw new IllegalArgumentException("Only Y/N chars are acceptable.");
+        }
+
+        if(containsDigit(name) || containsDigit(preferredMeal) || containsDigit(isVeganString)) {
             throw new IllegalArgumentException("Digits are not acceptable.");
         }
 
-        if(name.length() < 3) {
+        if(name.length() < 3 || preferredMeal.length() < 3) {
             throw new IllegalArgumentException("Type at least 3 characters.");
         }
 
-        guests.add(name);
+        Guest guest = new Guest(name, preferredMeal, phoneNumber, isVegan);
+
+        meals.add(meal);
+        guestPhone.put(phoneNumber, guest);
+
+        guests.add(guest);
     }
 }
